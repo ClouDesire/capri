@@ -21,6 +21,8 @@ class UrbanDataServiceImpl : UrbanDataService {
         json.close()
     }
 
-    override fun findByCap(cap: String): UrbanData = urbanData.single { u -> u.cap.contains( cap ) }
-    
+    override fun findByCap(cap: String): List<UrbanData> = urbanData.filter { u -> u.cap.contains( cap ) }
+
+    override fun findByCode(code: String): UrbanData = urbanData.single { u -> u.codice.contains( code ) }
+
 }

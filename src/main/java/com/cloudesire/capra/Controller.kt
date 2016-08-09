@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class Controller @Autowired constructor(val repository: UrbanDataService) {
 
-    @RequestMapping("/{cap}")
+    @RequestMapping("/cap={cap}")
     fun findByCap(@PathVariable cap: String) = repository.findByCap(cap)
+
+    @RequestMapping("/codice={code}")
+    fun findByCode(@PathVariable code: String) = repository.findByCode(code)
 
 }
