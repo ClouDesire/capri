@@ -4,6 +4,6 @@ interface UrbanDataService {
 
     fun findByCap(cap: String): ProvinceData?
 
-    fun findByCode(code: String): UrbanData
+    fun findByCode(code: String): UrbanData?
 
 }

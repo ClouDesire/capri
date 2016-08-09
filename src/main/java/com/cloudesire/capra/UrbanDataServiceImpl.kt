@@ -26,7 +26,7 @@ class UrbanDataServiceImpl : UrbanDataService {
 
     override fun findByCap(cap: String): ProvinceData? = capData.get(cap)
 
-    override fun findByCode(code: String): UrbanData = urbanData.single { u -> u.codice.contains( code ) }
+    override fun findByCode(code: String): UrbanData? = urbanData.singleOrNull { u -> u.codice.contains( code ) }
 
     private fun indexByCap(urbanData: List<UrbanData>): Map<String, ProvinceData> {
         val capData = HashMap<String, ProvinceData>()
