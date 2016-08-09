@@ -15,6 +15,6 @@ open class UrbanDataServiceImpl @Autowired constructor(loader: ResourceLoader, m
     val json = loader.getResource("classpath:comuni.json").inputStream
     var urbanData: List<UrbanData> = mapper.readValue(json)
 
-    override fun findByCap(cap: String): UrbanData = urbanData.single { u -> u.cap == cap }
+    override fun findByCap(cap: String): UrbanData = urbanData.single { u -> u.cap.contains( cap ) }
     
 }
