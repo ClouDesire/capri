@@ -1,15 +1,11 @@
 package com.cloudesire.capra
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.core.io.ResourceLoader
 import org.springframework.stereotype.Service
-import java.io.InputStream
+import java.net.URL
 import java.util.*
-import javax.annotation.PostConstruct
 
 @Service
 class UrbanDataServiceImpl : UrbanDataService {
@@ -17,8 +13,8 @@ class UrbanDataServiceImpl : UrbanDataService {
     lateinit var urbanData: List<UrbanData>
     lateinit var capData: Map<String, ProvinceData>
 
-    @Autowired constructor(loader: ResourceLoader, mapper: ObjectMapper) {
-        val json: InputStream = loader.getResource("classpath:comuni.json").inputStream
+    @Autowired constructor(mapper: ObjectMapper) {
+        val json = URL("https://github.com/matteocontrini/comuni-json/raw/master/comuni.json").openStream()
         urbanData = mapper.readValue(json)
         capData = indexByCap(urbanData)
         json.close()
