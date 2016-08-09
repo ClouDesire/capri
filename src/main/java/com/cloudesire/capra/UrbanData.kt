@@ -14,6 +14,14 @@ data class UrbanData(val nome: String, var codice: String, var zona: CodeName, v
         }
     }
 
+    fun province(): String {
+        return if (!provincia.nome.equals( "-" )) provincia.nome else cm.nome
+    }
+
+    fun abbreviation() = sigla
+
+    fun region() = regione.nome
+
 }
 
 

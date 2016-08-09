@@ -28,7 +28,7 @@ class UrbanDataServiceImpl : UrbanDataService {
         val capData = HashMap<String, ProvinceData>()
         for (data in urbanData) {
             for (cap in data.cap) {
-                capData.putIfAbsent(cap, ProvinceData(data.provincia.nome, data.sigla, data.regione.nome))
+                capData.putIfAbsent(cap, ProvinceData(data.province(), data.abbreviation(), data.region()))
             }
         }
         return capData
