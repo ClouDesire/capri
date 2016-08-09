@@ -7,13 +7,19 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.ResourceLoader
 import org.springframework.stereotype.Service
+import java.io.InputStream
 import javax.annotation.PostConstruct
 
 @Service
-open class UrbanDataServiceImpl @Autowired constructor(loader: ResourceLoader, mapper: ObjectMapper) : UrbanDataService {
+class UrbanDataServiceImpl : UrbanDataService {
 
-    val json = loader.getResource("classpath:comuni.json").inputStream
-    var urbanData: List<UrbanData> = mapper.readValue(json)
+    lateinit var urbanData: List<UrbanData>
+
+    @Autowired constructor(loader: ResourceLoader, mapper: ObjectMapper) {
+        val json: InputStream = loader.getResource("classpath:comuni.json").inputStream
+        urbanData = mapper.readValue(json)
+        json.close()
+    }
 
     override fun findByCap(cap: String): UrbanData = urbanData.single { u -> u.cap.contains( cap ) }
     
