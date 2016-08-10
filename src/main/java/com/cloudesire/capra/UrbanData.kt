@@ -22,7 +22,7 @@ data class UrbanData(val nome: String, var codice: String, var zona: CodeName, v
 
     fun region() = regione.nome
 
+    data class CodeName(var nome: String, var codice: String)
 }
 
 
-data class CodeName(var nome: String, var codice: String)

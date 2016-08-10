@@ -13,7 +13,6 @@ class Controller @Autowired constructor(val repository: UrbanDataService) {
     @RequestMapping("/codice={code:\\d{6}}")
     fun findByCode(@PathVariable code: String): UrbanData = repository.findByCode(code) ?: throw NotFoundException()
 
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    class NotFoundException : RuntimeException()
 }
-
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
-class NotFoundException : RuntimeException()
