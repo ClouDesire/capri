@@ -3,6 +3,8 @@ package com.cloudesire.capra
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.net.URL
 import java.util.*
@@ -13,8 +15,9 @@ class UrbanDataServiceImpl : UrbanDataService {
     lateinit var urbanData: List<UrbanData>
     lateinit var capData: Map<String, ProvinceData>
 
-    @Autowired constructor(mapper: ObjectMapper) {
-        val json = URL("https://github.com/matteocontrini/comuni-json/raw/master/comuni.json").openStream()
+    @Autowired
+    constructor(@Qualifier("applicationProperties") properties: ApplicationProperties, mapper: ObjectMapper) {
+        val json = URL(properties.dataSource).openStream()
         urbanData = mapper.readValue(json)
         capData = indexByCap(urbanData)
         json.close()

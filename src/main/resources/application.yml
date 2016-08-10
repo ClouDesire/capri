@@ -1,0 +1,2 @@
+application:
+  data_source: https://github.com/matteocontrini/comuni-json/raw/master/comuni.json
