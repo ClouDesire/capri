@@ -20,22 +20,10 @@ node
         step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
       }
 
-    stage 'Publish'
-      build 'capra-publisher'
-      /* def server = Artifactory.server('503750253@1369127525305')
-      def uploadSpec = """{
-        "files": [
-          {
-            "pattern": "client/target/*.jar",
-            "target": "libs-snapshot-local"
-          },
-          {
-            "pattern": "server/target/*.jar",
-            "target": "libs-snapshot-local"
-          }
-        ]
-      }"""
-      server.upload(uploadSpec)*/
+    if ( ! env.BRANCH_NAME.startsWith('PR-') ) {
+      stage 'Publish'
+        build 'capra-publisher'
+    }
 
     stage 'Docker'
       dir('server') {
