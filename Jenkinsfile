@@ -27,7 +27,9 @@ node
 
     stage 'Docker'
       dir('server') {
-        sh "mvn docker:build -DpushImageTags -DdockerImageTag=latest -DdockerImageTag=${env.BUILD_NUMBER}"
+        if ( ! env.BRANCH_NAME.startsWith('PR-') ) {
+          sh "mvn docker:build -DpushImage -DpushImageTags -DdockerImageTag=latest -DdockerImageTag=${env.BUILD_NUMBER}"
+        }
       }
 
     stage 'Cleanup'
