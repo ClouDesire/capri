@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 node
 {
   currentBuild.result = "SUCCESS"
@@ -47,7 +49,7 @@ node
   catch ( err )
   {
       currentBuild.result = "FAILURE"
-      slackSend "Shame on ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)" 
+      slackSend "Shame on ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
       throw err
   }
 }
