@@ -40,10 +40,10 @@ node
     stage 'Cleanup'
       echo 'prune and cleanup'
       dir('client') {
-        sh 'mvn install'
+        sh 'mvn clean'
       }
       dir('server') {
-        sh 'mvn install'
+        sh 'mvn clean'
       }
   }
   catch ( err )
