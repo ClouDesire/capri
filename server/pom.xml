@@ -86,7 +86,7 @@
                     <imageName>docker.cloudesire.com/capra</imageName>
                     <dockerDirectory>docker</dockerDirectory>
                     <forceTags>true</forceTags>
-	                <useConfigFile>true</useConfigFile>
+                    <useConfigFile>true</useConfigFile>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
