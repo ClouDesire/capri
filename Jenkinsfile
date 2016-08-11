@@ -37,6 +37,11 @@ node
       }"""
       server.upload(uploadSpec)*/
 
+    stage 'Docker'
+      dir('server') {
+        sh "mvn docker:build -DpushImageTags -DdockerImageTag=latest -DdockerImageTag=${env.BUILD_NUMBER}"
+      }
+
     stage 'Cleanup'
       echo 'prune and cleanup'
       dir('client') {
