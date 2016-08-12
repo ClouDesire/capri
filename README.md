@@ -4,7 +4,7 @@ Simple API for italian CAP lookup.
 
 ## Data source
 
-Current database is obtained from https://github.com/matteocontrini/comuni-json
+Current database is obtained from [https://github.com/matteocontrini/comuni-json](https://github.com/matteocontrini/comuni-json)
 
 ## API
 
