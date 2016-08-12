@@ -11,7 +11,7 @@ Current database is obtained from https://github.com/matteocontrini/comuni-json
 ### CAP Lookup
 
 ```
-GET /cap=00195
+GET /cap/00195
 
 Content-Type: application/json;charset=UTF-8
 
@@ -24,4 +24,4 @@ Content-Type: application/json;charset=UTF-8
 
 ## Usage
 
-An hosted instance is publicy available at [https://capri.cloudesire.com](https://capri.cloudesire.com/cap=00195), running on a Hetzner.de server.
+An hosted instance is publicly available at [https://capri.cloudesire.com](https://capri.cloudesire.com/cap/00195), running on a Hetzner.de server.

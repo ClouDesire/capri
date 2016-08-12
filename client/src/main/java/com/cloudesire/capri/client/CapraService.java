@@ -6,6 +6,6 @@ import retrofit2.http.Path;
 
 public interface CapraService
 {
-    @GET( "/cap={cap}" )
+    @GET( "/cap/{cap}" )
     Call<ProvinceData> query( @Path( "cap" ) String cap);
 }
