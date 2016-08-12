@@ -1,10 +1,10 @@
 package com.cloudesire.capri
 
+import com.cloudesire.capri.client.ProvinceData
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.net.URL
 import java.util.*
@@ -23,7 +23,7 @@ class UrbanDataServiceImpl : UrbanDataService {
         json.close()
     }
 
-    override fun findByCap(cap: String): ProvinceData? = capData.get(cap)
+    override fun findByCap(cap: String): ProvinceData? = capData[cap]
 
     override fun findByCode(code: String): UrbanData? = urbanData.singleOrNull { u -> u.codice.contains( code ) }
 

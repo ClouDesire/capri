@@ -1,5 +1,6 @@
 package com.cloudesire.capri
 
+import com.cloudesire.capri.client.ProvinceData
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
