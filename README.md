@@ -17,9 +17,13 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "abbreviation": "RM", 
+    "cities": [
+        "Roma"
+    ], 
     "province": "Roma", 
     "region": "Lazio"
 }
+
 ```
 
 ## Usage
