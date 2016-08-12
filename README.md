@@ -1,4 +1,4 @@
-# CAP Rest Api
+# CAP Retrieve Interface
 
 Simple API for italian CAP lookup.
 
@@ -24,4 +24,4 @@ Content-Type: application/json;charset=UTF-8
 
 ## Usage
 
-An hosted instance is publicy available at [https://capra.cloudesire.com](https://capra.cloudesire.com/cap=00195), running on a Hetzner.de server.
+An hosted instance is publicy available at [https://capri.cloudesire.com](https://capri.cloudesire.com/cap=00195), running on a Hetzner.de server.

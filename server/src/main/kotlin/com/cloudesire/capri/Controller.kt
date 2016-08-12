@@ -1,4 +1,4 @@
-package com.cloudesire.capra
+package com.cloudesire.capri
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

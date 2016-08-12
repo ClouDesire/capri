@@ -1,4 +1,4 @@
-package com.cloudesire.capra
+package com.cloudesire.capri
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component

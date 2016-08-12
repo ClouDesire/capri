@@ -22,7 +22,7 @@ node
 
     if ( ! env.BRANCH_NAME.startsWith('PR-') ) {
       stage 'Publish'
-        build 'capra-publisher'
+        build 'capri-publisher'
     }
 
     stage 'Docker'

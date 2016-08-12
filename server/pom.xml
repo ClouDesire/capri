@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cloudesire</groupId>
-    <artifactId>capra</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <artifactId>capri</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <properties>
         <kotlin.version>1.0.3</kotlin.version>
@@ -48,13 +48,13 @@
         </dependency>
         <dependency>
             <groupId>com.cloudesire</groupId>
-            <artifactId>capra-client</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <artifactId>capri-client</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>capra-server</finalName>
+        <finalName>capri-server</finalName>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <plugins>
             <plugin>
@@ -87,7 +87,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.11</version>
                 <configuration>
-                    <imageName>docker.cloudesire.com/capra</imageName>
+                    <imageName>docker.cloudesire.com/capri</imageName>
                     <dockerDirectory>docker</dockerDirectory>
                     <forceTags>true</forceTags>
                     <useConfigFile>true</useConfigFile>

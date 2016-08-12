@@ -1,4 +1,4 @@
-package com.cloudesire.capra;
+package com.cloudesire.capri.client;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

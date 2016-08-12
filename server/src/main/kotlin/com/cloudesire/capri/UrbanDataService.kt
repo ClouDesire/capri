@@ -1,4 +1,4 @@
-package com.cloudesire.capra
+package com.cloudesire.capri
 
 interface UrbanDataService {
 

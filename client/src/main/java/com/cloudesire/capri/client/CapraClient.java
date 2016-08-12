@@ -1,4 +1,4 @@
-package com.cloudesire.capra;
+package com.cloudesire.capri.client;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
