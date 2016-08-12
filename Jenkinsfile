@@ -2,7 +2,6 @@
 
 node
 {
-  currentBuild.result = "SUCCESS"
   def mvnHome = tool 'maven-3.3.3'
   env.PATH = "${mvnHome}/bin:${env.PATH}"
 
