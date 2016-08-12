@@ -5,11 +5,11 @@ import retrofit2.Retrofit;
 
 import java.util.concurrent.TimeUnit;
 
-public class CapraClient
+public class CapriClient
 {
     private final Retrofit retrofit;
 
-    public CapraClient( String baseUrl )
+    public CapriClient( String baseUrl )
     {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout( 30, TimeUnit.SECONDS ) // connect timeout
@@ -22,8 +22,8 @@ public class CapraClient
                 .build();
     }
 
-    public CapraService getService()
+    public CapriService getService()
     {
-        return retrofit.create( CapraService.class );
+        return retrofit.create( CapriService.class );
     }
 }
