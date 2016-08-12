@@ -54,6 +54,7 @@
     </dependencies>
 
     <build>
+        <finalName>capra-server</finalName>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <plugins>
             <plugin>
@@ -76,6 +77,24 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.11</version>
+                <configuration>
+                    <imageName>docker.cloudesire.com/capra</imageName>
+                    <dockerDirectory>docker</dockerDirectory>
+                    <forceTags>true</forceTags>
+                    <useConfigFile>true</useConfigFile>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
