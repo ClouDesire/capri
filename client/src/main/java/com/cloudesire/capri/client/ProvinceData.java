@@ -1,5 +1,8 @@
 package com.cloudesire.capri.client;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ProvinceData
 {
     private String province;
@@ -7,6 +10,8 @@ public class ProvinceData
     private String abbreviation;
 
     private String region;
+
+    private Set<String> cities = new HashSet<>();
 
     public ProvinceData( String province, String abbreviation, String region )
     {
@@ -47,5 +52,20 @@ public class ProvinceData
     public void setRegion( String region )
     {
         this.region = region;
+    }
+
+    public Set<String> getCities()
+    {
+        return cities;
+    }
+
+    public void setCities( Set<String> cities )
+    {
+        this.cities = cities;
+    }
+
+    public void addCity( String city )
+    {
+        this.cities.add( city );
     }
 }
