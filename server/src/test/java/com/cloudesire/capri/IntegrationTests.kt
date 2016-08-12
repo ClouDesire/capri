@@ -23,16 +23,19 @@ class IntegrationTests {
         assertThat(body.province).isEqualTo("Torino")
         assertThat(body.abbreviation).isEqualTo("TO")
         assertThat(body.region).isEqualTo("Piemonte")
+        assertThat(body.cities).isNotEmpty()
 
         body = restTemplate.getForObject("/cap/56121", ProvinceData::class.java)
         assertThat(body.province).isEqualTo("Pisa")
         assertThat(body.abbreviation).isEqualTo("PI")
         assertThat(body.region).isEqualTo("Toscana")
+        assertThat(body.cities).isNotEmpty()
 
         body = restTemplate.getForObject("/cap/71043", ProvinceData::class.java)
         assertThat(body.province).isEqualTo("Foggia")
         assertThat(body.abbreviation).isEqualTo("FG")
         assertThat(body.region).isEqualTo("Puglia")
+        assertThat(body.cities).isNotEmpty()
     }
 
     @Test

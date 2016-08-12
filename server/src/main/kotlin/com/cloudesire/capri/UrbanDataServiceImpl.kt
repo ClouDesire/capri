@@ -32,6 +32,7 @@ class UrbanDataServiceImpl : UrbanDataService {
         for (data in urbanData) {
             for (cap in data.cap) {
                 capData.putIfAbsent(cap, ProvinceData(data.province(), data.abbreviation(), data.region()))
+                capData[cap]?.addCity(data.name())
             }
         }
         return capData
