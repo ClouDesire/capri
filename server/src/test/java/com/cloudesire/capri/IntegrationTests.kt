@@ -19,17 +19,17 @@ class IntegrationTests {
 
     @Test
     fun getByCap() {
-        var body = restTemplate.getForObject("/cap=10040", ProvinceData::class.java)
+        var body = restTemplate.getForObject("/cap/10040", ProvinceData::class.java)
         assertThat(body.province).isEqualTo("Torino")
         assertThat(body.abbreviation).isEqualTo("TO")
         assertThat(body.region).isEqualTo("Piemonte")
 
-        body = restTemplate.getForObject("/cap=56121", ProvinceData::class.java)
+        body = restTemplate.getForObject("/cap/56121", ProvinceData::class.java)
         assertThat(body.province).isEqualTo("Pisa")
         assertThat(body.abbreviation).isEqualTo("PI")
         assertThat(body.region).isEqualTo("Toscana")
 
-        body = restTemplate.getForObject("/cap=71043", ProvinceData::class.java)
+        body = restTemplate.getForObject("/cap/71043", ProvinceData::class.java)
         assertThat(body.province).isEqualTo("Foggia")
         assertThat(body.abbreviation).isEqualTo("FG")
         assertThat(body.region).isEqualTo("Puglia")
@@ -37,7 +37,7 @@ class IntegrationTests {
 
     @Test
     fun getByCode() {
-        val body = restTemplate.getForObject("/codice=001315", UrbanData::class.java)
+        val body = restTemplate.getForObject("/codice/001315", UrbanData::class.java)
         assertThat(body.nome).isEqualTo("Volvera")
     }
 
@@ -46,16 +46,16 @@ class IntegrationTests {
         val any = restTemplate.getForEntity("/no", Any::class.java)
         assertThat(any.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
 
-        var provinceData = restTemplate.getForEntity("/cap=100400", Any::class.java)
+        var provinceData = restTemplate.getForEntity("/cap/100400", Any::class.java)
         assertThat(provinceData.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
 
-        provinceData = restTemplate.getForEntity("/cap=00000", Any::class.java)
+        provinceData = restTemplate.getForEntity("/cap/00000", Any::class.java)
         assertThat(provinceData.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
 
-        var urbanData = restTemplate.getForEntity("/codice=0013150", Any::class.java)
+        var urbanData = restTemplate.getForEntity("/codice/0013150", Any::class.java)
         assertThat(urbanData.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
 
-        urbanData = restTemplate.getForEntity("/codice=000000", Any::class.java)
+        urbanData = restTemplate.getForEntity("/codice/000000", Any::class.java)
         assertThat(urbanData.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
     }
 
