@@ -1,6 +1,8 @@
 # CAP Retrieve Interface
 
-Simple API for italian CAP lookup.
+Simple REST API for italian CAP database lookup.
+
+Semplice REST API per la ricerca all'interno del database dei CAP (codici di avviamento postale)
 
 ## Data source
 
