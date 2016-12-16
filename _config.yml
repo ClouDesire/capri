@@ -1,0 +1,8 @@
+title: Capri
+description: API for italian CAP lookup
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-minimal
+
+gems:
+  - jekyll-mentions
