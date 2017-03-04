@@ -26,4 +26,5 @@ deployment:
   docker:
     branch: master
     commands:
-      - mvn docker:build -DpushImage -DpushImageTags -DdockerImageTag=latest -DdockerImageTag=${env.CIRCLE_BUILD_NUM}
+      - docker login -u $REGISTRY_USERNAME -p $REGISTRY_PASSWORD -e circleci@cloudesire.com
+      - cd server && mvn docker:build -DpushImage -DpushImageTags -DdockerImageTag=latest -DdockerImageTag=$CIRCLE_BUILD_NUM

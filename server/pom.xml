@@ -87,7 +87,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.11</version>
                 <configuration>
-                    <imageName>docker.cloudesire.com/capri</imageName>
+                    <imageName>cloudesire/capri</imageName>
                     <dockerDirectory>docker</dockerDirectory>
                     <forceTags>true</forceTags>
                     <useConfigFile>true</useConfigFile>
