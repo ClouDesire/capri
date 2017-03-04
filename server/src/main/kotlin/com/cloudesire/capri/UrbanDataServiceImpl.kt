@@ -1,6 +1,7 @@
 package com.cloudesire.capri
 
 import com.cloudesire.capri.client.ProvinceData
+import com.fasterxml.jackson.core.JsonParseException
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,26 +18,39 @@ class UrbanDataServiceImpl : UrbanDataService {
 
     var urbanData: List<UrbanData>
     var capData: Map<String, ProvinceData>
+    val databaseFilePath = System.getProperty("java.io.tmpdir") + "/cap.json"
     val one_day = 24 * 60 * 60 * 1000
 
     @Autowired
     constructor(@Qualifier("applicationProperties") properties: ApplicationProperties, mapper: ObjectMapper) {
 
-        val file = File(System.getProperty("java.io.tmpdir") + "/cap.json")
+        val databaseUrl = properties.dataSource
+        val file = File(databaseFilePath)
         val stale = (Date().time - file.lastModified()) > one_day
         if ( stale ) {
-            val remoteJson = URL(properties.dataSource).openStream()
-            try {
-                val tempFile = File(System.getProperty("java.io.tmpdir") + "/cap.json.tmp")
-                Files.copy(remoteJson, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING)
-                Files.copy(tempFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING)
-                tempFile.delete()
-            } finally {
-                remoteJson.close()
-            }
+            fetchDatabase(databaseUrl, file)
         }
-        urbanData = mapper.readValue(file.inputStream())
-        capData = indexByCap(urbanData)
+        try {
+            urbanData = mapper.readValue(file.inputStream())
+            capData = indexByCap(urbanData)
+        } catch (e: JsonParseException) {
+            file.delete()
+            fetchDatabase(databaseUrl, file)
+            urbanData = mapper.readValue(file.inputStream())
+            capData = indexByCap(urbanData)
+        }
+    }
+
+    private fun fetchDatabase(databaseUrl: String, file: File) {
+        val remoteJson = URL(databaseUrl).openStream()
+        try {
+            val tempFile = File(databaseFilePath + ".tmp")
+            Files.copy(remoteJson, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING)
+            Files.copy(tempFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING)
+            tempFile.delete()
+        } finally {
+            remoteJson.close()
+        }
     }
 
     override fun findByCap(cap: String): ProvinceData? = capData[cap]
