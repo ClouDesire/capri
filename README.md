@@ -1,8 +1,8 @@
 # CAP Retrieve Interface [![CircleCI](https://circleci.com/gh/ClouDesire/capri.svg?style=svg)](https://circleci.com/gh/ClouDesire/capri) [![Docker Pulls](https://img.shields.io/docker/pulls/cloudesire/capri.svg?style=plastic)](https://hub.docker.com/r/cloudesire/capri/)
 
-Simple REST API for italian CAP database lookup.
+Simple REST API for [italian CAP database](https://en.wikipedia.org/wiki/List_of_postal_codes_in_Italy) lookup.
 
-Semplice REST API per la ricerca all'interno del database dei CAP (codici di avviamento postale)
+Semplice REST API per la ricerca all'interno del database dei [CAP (codici di avviamento postale)](https://it.wikipedia.org/wiki/Codice_di_avviamento_postale)
 
 ## Data source
 
