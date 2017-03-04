@@ -1,4 +1,4 @@
-# CAP Retrieve Interface
+# CAP Retrieve Interface [![CircleCI](https://circleci.com/gh/ClouDesire/capri.svg?style=svg)](https://circleci.com/gh/ClouDesire/capri)
 
 Simple REST API for italian CAP database lookup.
 
