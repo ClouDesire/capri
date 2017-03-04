@@ -7,8 +7,13 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit4.SpringRunner
+
+
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -60,6 +65,28 @@ class IntegrationTests {
 
         urbanData = restTemplate.getForEntity("/codice/000000", Any::class.java)
         assertThat(urbanData.statusCode).isEqualTo(HttpStatus.NOT_FOUND)
+    }
+
+    @Test
+    fun cacheControlHeader() {
+        val response = restTemplate.getForEntity("/cap/56121", Any::class.java)
+        assertThat(response.headers.cacheControl).isEqualTo("max-age=2592000, public")
+    }
+
+    @Test
+    fun cors() {
+        val headers = HttpHeaders()
+        headers.set("Origin", "http://localhost")
+        headers.set("Access-Control-Request-Method", "GET")
+        val entity = HttpEntity<String>(null,headers)
+
+        val responseOptions = restTemplate.exchange("/cap/56121", HttpMethod.OPTIONS, entity, Any::class.java)
+        assertThat(responseOptions.headers.accessControlAllowOrigin).isEqualTo("http://localhost")
+        assertThat(responseOptions.headers.accessControlMaxAge).isEqualTo(1800L)
+        assertThat(responseOptions.headers.accessControlAllowMethods).containsExactly(HttpMethod.GET, HttpMethod.HEAD)
+
+        val response = restTemplate.exchange("/cap/56121", HttpMethod.GET, entity, Any::class.java)
+        assertThat(response.headers.accessControlAllowOrigin).isEqualTo("http://localhost")
     }
 
 }
