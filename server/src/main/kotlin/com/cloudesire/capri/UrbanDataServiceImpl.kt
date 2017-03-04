@@ -15,8 +15,8 @@ import java.util.*
 @Service
 class UrbanDataServiceImpl : UrbanDataService {
 
-    lateinit var urbanData: List<UrbanData>
-    lateinit var capData: Map<String, ProvinceData>
+    var urbanData: List<UrbanData>
+    var capData: Map<String, ProvinceData>
     val one_day = 24 * 60 * 60 * 1000
 
     @Autowired
