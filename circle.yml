@@ -10,8 +10,8 @@ machine:
 
 dependencies:
   override:
-    - cd client && mvn -B install -Dmaven.test.skip=true
-    - cd server && mvn -B install -Dmaven.test.skip=true
+    - cd client && mvn -B dependency:go-offline install -Dmaven.test.skip=true
+    - cd server && mvn -B dependency:go-offline install -Dmaven.test.skip=true
 
 test:
   override:
