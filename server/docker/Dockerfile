@@ -1,4 +1,4 @@
-FROM cloudesire/java:8
+FROM openjdk:8-jre-alpine
 MAINTAINER ClouDesire <dev@cloudesire.com>
 
 ADD capri-server.jar app.jar
