@@ -27,7 +27,10 @@ class UrbanDataServiceImpl : UrbanDataService {
         if ( stale ) {
             val remoteJson = URL(properties.dataSource).openStream()
             try {
-                Files.copy(remoteJson, file.toPath(), StandardCopyOption.REPLACE_EXISTING)
+                val tempFile = File(System.getProperty("java.io.tmpdir") + "/cap.json.tmp")
+                Files.copy(remoteJson, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING)
+                Files.copy(tempFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING)
+                tempFile.delete()
             } finally {
                 remoteJson.close()
             }
