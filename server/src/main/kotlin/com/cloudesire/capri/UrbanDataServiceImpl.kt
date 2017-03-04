@@ -6,7 +6,10 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
+import java.io.File
 import java.net.URL
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 import java.util.*
 
 @Service
@@ -14,13 +17,23 @@ class UrbanDataServiceImpl : UrbanDataService {
 
     lateinit var urbanData: List<UrbanData>
     lateinit var capData: Map<String, ProvinceData>
+    val one_day = 24 * 60 * 60 * 1000
 
     @Autowired
     constructor(@Qualifier("applicationProperties") properties: ApplicationProperties, mapper: ObjectMapper) {
-        val json = URL(properties.dataSource).openStream()
-        urbanData = mapper.readValue(json)
+
+        val file = File(System.getProperty("java.io.tmpdir") + "/cap.json")
+        val stale = (Date().time - file.lastModified()) > one_day
+        if ( stale ) {
+            val remoteJson = URL(properties.dataSource).openStream()
+            try {
+                Files.copy(remoteJson, file.toPath(), StandardCopyOption.REPLACE_EXISTING)
+            } finally {
+                remoteJson.close()
+            }
+        }
+        urbanData = mapper.readValue(file.inputStream())
         capData = indexByCap(urbanData)
-        json.close()
     }
 
     override fun findByCap(cap: String): ProvinceData? = capData[cap]
