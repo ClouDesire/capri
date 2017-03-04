@@ -7,7 +7,6 @@ machine:
     - docker
   pre:
     - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
-    - pip install docker-compose==1.8.0
 
 dependencies:
   override:
@@ -18,9 +17,8 @@ test:
   override:
     - cd server && mvn -B verify -Dmaven.test.skip=false
   post:
-    - mkdir -p $CIRCLE_TEST_REPORTS/surefire/ $CIRCLE_TEST_REPORTS/failsafe/
+    - mkdir -p $CIRCLE_TEST_REPORTS/surefire/
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/surefire/ \;
-    - find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/failsafe/ \;
 
 deployment:
   docker:
