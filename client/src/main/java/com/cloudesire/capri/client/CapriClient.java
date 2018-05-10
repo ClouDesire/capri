@@ -2,6 +2,7 @@ package com.cloudesire.capri.client;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +20,7 @@ public class CapriClient
         retrofit = new Retrofit.Builder()
                 .baseUrl( baseUrl )
                 .client( client )
+                .addConverterFactory( JacksonConverterFactory.create() )
                 .build();
     }
 
