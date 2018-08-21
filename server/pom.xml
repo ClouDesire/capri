@@ -53,8 +53,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.cloudesire</groupId>
-			<artifactId>capri-client</artifactId>
+			<groupId>com.cloudesire.capri</groupId>
+			<artifactId>client</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
