@@ -81,12 +81,12 @@ class IntegrationTests {
         val entity = HttpEntity<String>(null,headers)
 
         val responseOptions = restTemplate.exchange("/cap/56121", HttpMethod.OPTIONS, entity, Any::class.java)
-        assertThat(responseOptions.headers.accessControlAllowOrigin).isEqualTo("http://localhost")
+        assertThat(responseOptions.headers.accessControlAllowOrigin).isEqualTo("*")
         assertThat(responseOptions.headers.accessControlMaxAge).isEqualTo(1800L)
         assertThat(responseOptions.headers.accessControlAllowMethods).containsExactly(HttpMethod.GET, HttpMethod.HEAD)
 
         val response = restTemplate.exchange("/cap/56121", HttpMethod.GET, entity, Any::class.java)
-        assertThat(response.headers.accessControlAllowOrigin).isEqualTo("http://localhost")
+        assertThat(response.headers.accessControlAllowOrigin).isEqualTo("*")
     }
 
 }
