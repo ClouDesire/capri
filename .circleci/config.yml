@@ -54,7 +54,7 @@ jobs:
         name: Upload client
         command: |
           if [ "$CIRCLE_BRANCH" == "master" ]; then
-            ./mvwn -B deploy -Dmaven.test.skip=true
+            ./mvnw -B deploy -Dmaven.test.skip=true
           fi
 
     - deploy:
