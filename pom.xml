@@ -14,5 +14,17 @@
 		<module>client</module>
 	</modules>
 
+	<distributionManagement>
+		<repository>
+			<id>bintray</id>
+			<url>https://api.bintray.com/maven/cloudesire/maven-releases/capri/;publish=1</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>libs-snapshot-local</name>
+			<url>https://artifactory.cloudesire.com/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 
 </project>
