@@ -1,0 +1,65 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+    - image: openjdk:8-jdk
+      environment:
+      - BASE_BUILD_NUM: 0
+
+    environment:
+      MAVEN_OPTS: "-Xmx2048m"
+
+    steps:
+    - checkout
+
+    - run:
+        name: Get common configs
+        command: git clone git@github.com:ClouDesire/ci-conf.git ~/repo/conf
+
+    - restore_cache:
+        keys:
+        - m2-{{ checksum "server/pom.xml" }}
+        - m2-
+
+    - run:
+        name: Setup artifactory
+        command: mkdir -p ~/.m2 && cp ~/repo/conf/mvn/settings.xml ~/.m2
+
+    - run:
+        name: Build
+        command: ./mvnw -B verify
+
+    - save_cache:
+        key: m2-{{ checksum "server/pom.xml" }}
+        paths:
+        - "~/.m2"
+
+    - setup_remote_docker
+
+    - run:
+        name: Install Docker client
+        command: |
+          set -x
+          VER="17.03.0-ce"
+          curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+          tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+          mv /tmp/docker/* /usr/bin
+
+    - run:
+        name: Build Docker Image
+        command: cd server && ~/repo/conf/mvn/docker-build.sh
+
+    - deploy:
+        name: Upload client
+        command: |
+          if [ "$CIRCLE_BRANCH" == "master" ]; then
+            ./mvwn -B deploy -Dmaven.test.skip=true
+          fi
+
+    - deploy:
+        name: Upload Docker Image
+        command: |
+          if [ "$CIRCLE_BRANCH" == "master" ]; then
+            ~/repo/conf/mvn/docker-upload.sh
+          fi

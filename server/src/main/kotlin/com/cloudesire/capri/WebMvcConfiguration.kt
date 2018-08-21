@@ -5,13 +5,13 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.http.CacheControl
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.springframework.web.servlet.mvc.WebContentInterceptor
 import java.util.concurrent.TimeUnit
 
 @Configuration
 @EnableAutoConfiguration
-open class WebMvcConfiguration : WebMvcConfigurerAdapter() {
+open class WebMvcConfiguration : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry?) {
         registry!!.addMapping("/**").allowedMethods("GET", "HEAD").allowedOrigins("*")
     }

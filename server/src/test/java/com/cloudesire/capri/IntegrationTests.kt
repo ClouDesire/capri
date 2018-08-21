@@ -28,19 +28,19 @@ class IntegrationTests {
         assertThat(body.province).isEqualTo("Torino")
         assertThat(body.abbreviation).isEqualTo("TO")
         assertThat(body.region).isEqualTo("Piemonte")
-        assertThat(body.cities).isNotEmpty()
+        assertThat(body.cities).isNotEmpty
 
         body = restTemplate.getForObject("/cap/56121", ProvinceData::class.java)
         assertThat(body.province).isEqualTo("Pisa")
         assertThat(body.abbreviation).isEqualTo("PI")
         assertThat(body.region).isEqualTo("Toscana")
-        assertThat(body.cities).isNotEmpty()
+        assertThat(body.cities).isNotEmpty
 
         body = restTemplate.getForObject("/cap/71043", ProvinceData::class.java)
         assertThat(body.province).isEqualTo("Foggia")
         assertThat(body.abbreviation).isEqualTo("FG")
         assertThat(body.region).isEqualTo("Puglia")
-        assertThat(body.cities).isNotEmpty()
+        assertThat(body.cities).isNotEmpty
     }
 
     @Test
@@ -81,12 +81,12 @@ class IntegrationTests {
         val entity = HttpEntity<String>(null,headers)
 
         val responseOptions = restTemplate.exchange("/cap/56121", HttpMethod.OPTIONS, entity, Any::class.java)
-        assertThat(responseOptions.headers.accessControlAllowOrigin).isEqualTo("http://localhost")
+        assertThat(responseOptions.headers.accessControlAllowOrigin).isEqualTo("*")
         assertThat(responseOptions.headers.accessControlMaxAge).isEqualTo(1800L)
         assertThat(responseOptions.headers.accessControlAllowMethods).containsExactly(HttpMethod.GET, HttpMethod.HEAD)
 
         val response = restTemplate.exchange("/cap/56121", HttpMethod.GET, entity, Any::class.java)
-        assertThat(response.headers.accessControlAllowOrigin).isEqualTo("http://localhost")
+        assertThat(response.headers.accessControlAllowOrigin).isEqualTo("*")
     }
 
 }
