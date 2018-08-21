@@ -15,13 +15,13 @@ import org.springframework.test.context.junit4.SpringRunner
 class ClientTest {
 
     @LocalServerPort
-    private val port: Int = -1;
+    private val port: Int = -1
 
     @Test
     fun getByCap() {
-        val client = CapriClient("http://localhost:$port");
+        val client = CapriClient("http://localhost:$port")
         val response = client.service.query("55015").execute()
         val provinceData = response.body()
-        assertThat( provinceData!!.province ).isEqualTo("Lucca");
+        assertThat( provinceData!!.province ).isEqualTo("Lucca")
     }
 }
