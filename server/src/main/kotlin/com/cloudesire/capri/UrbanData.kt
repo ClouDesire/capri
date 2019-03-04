@@ -3,7 +3,7 @@ package com.cloudesire.capri
 import com.fasterxml.jackson.annotation.JsonSetter
 
 data class UrbanData(val nome: String, var codice: String, var zona: CodeName, var regione: CodeName,
-                     var cm: CodeName, var provincia: CodeName, var sigla: String, var codiceCatastale: String) {
+                     var provincia: CodeName, var sigla: String, var codiceCatastale: String) {
 
     var cap: List<String> = listOf()
 
@@ -15,7 +15,7 @@ data class UrbanData(val nome: String, var codice: String, var zona: CodeName, v
     }
 
     fun province(): String {
-        return if (provincia.nome != "") provincia.nome else cm.nome
+        return provincia.nome
     }
 
     fun abbreviation() = sigla
