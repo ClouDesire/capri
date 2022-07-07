@@ -66,3 +66,4 @@ workflows:
             - common-not-really-secrets
             - common-github
             - common-archiva
+            - common-docker
