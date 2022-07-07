@@ -42,13 +42,6 @@ jobs:
         command: cd server && ~/repo/conf/mvn/docker-build.sh
 
     - deploy:
-        name: Upload client
-        command: |
-          if [ "$CIRCLE_BRANCH" == "master" ]; then
-            ./mvnw -B deploy -Dmaven.test.skip=true
-          fi
-
-    - deploy:
         name: Upload Docker Image
         command: |
           if [ "$CIRCLE_BRANCH" == "master" ]; then
