@@ -9,7 +9,7 @@
 	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
-		<kotlin.version>1.3.31</kotlin.version>
+		<kotlin.version>1.7.0</kotlin.version>
 	</properties>
 
 	<!-- Inherit defaults from Spring Boot -->
@@ -96,7 +96,6 @@
 					<imageName>cloudesire/capri</imageName>
 					<dockerDirectory>docker</dockerDirectory>
 					<forceTags>true</forceTags>
-					<useConfigFile>true</useConfigFile>
 					<resources>
 						<resource>
 							<targetPath>/</targetPath>

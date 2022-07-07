@@ -1,14 +1,17 @@
-version: 2
+version: 2.1
+
+orbs:
+  cloudesire: cloudesire/common@0
+
+defaults: &defaults
+  environment:
+    BASE_BUILD_NUM: "0"
+  executor:
+    name: cloudesire/docker_java
 
 jobs:
   build:
-    docker:
-    - image: circleci/openjdk:8u151-jdk
-      environment:
-      - BASE_BUILD_NUM: 0
-
-    environment:
-      MAVEN_OPTS: "-Xmx2048m"
+    <<: *defaults
 
     steps:
     - checkout
@@ -45,7 +48,7 @@ jobs:
         name: Upload client
         command: |
           if [ "$CIRCLE_BRANCH" == "master" ]; then
-            ./mvnw -B deploy -Dmaven.test.skip=true
+            ./mvnw -B deploy -Dmaven.test.skip=true -pl client
           fi
 
     - deploy:
@@ -54,3 +57,12 @@ jobs:
           if [ "$CIRCLE_BRANCH" == "master" ]; then
             ~/repo/conf/mvn/docker-upload.sh
           fi
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - build:
+          context:
+            - common-not-really-secrets
+            - common-github
+            - common-archiva
